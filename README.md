@@ -4,7 +4,7 @@
 [![License: MIT](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE)
 [![Website](https://img.shields.io/badge/website-botconnector.id-06305A)](https://botconnector.id/id/switchboard)
 
-Contoh plugin kecil untuk [Switchboard](https://github.com/farijarifriyanto-debug/switchboard) — harness agent dari BotConnector tempat semuanya plugin. Setiap file di `plugins/` berdiri sendiri, bisa disalin ke project Anda dan disesuaikan.
+Contoh plugin kecil untuk [Switchboard](https://github.com/farijarifriyanto-debug/switchboard) — harness agent dari BotConnector tempat semuanya plugin. Setiap file di `plugins/` berdiri sendiri, bisa disalin ke project Anda dan disesuaikan. [`catalog.json`](catalog.json) adalah daftar resmi plugin di repo ini.
 
 ## Cara pakai
 
@@ -25,6 +25,14 @@ Atau lewat flag untuk percobaan cepat:
 ```bash
 sbx info -p ./plugins/hello-tool.mjs          # verifikasi tool terdaftar
 sbx chat -p ./plugins/hello-tool.mjs          # pakai di sesi chat
+```
+
+Lewat katalog:
+
+```bash
+node scripts/catalog.mjs list                 # daftar plugin
+node scripts/catalog.mjs show word-count      # detail + cara aktifkan
+node scripts/catalog.mjs install word-count   # salin ke ~/.switchboard/plugins/
 ```
 
 ## Daftar contoh
@@ -74,3 +82,7 @@ sbx run "Panggil tool word_count pada file sample.txt" -p ./plugins/word-count.m
 ## Lisensi
 
 MIT. Switchboard dan maskot BotConnector/Bico punya lisensi & merek masing-masing — lihat NOTICE di repo Switchboard.
+
+## Kontribusi
+
+Ingin menambahkan plugin ke katalog? Lihat [CONTRIBUTING.md](CONTRIBUTING.md) — plugin baru butuh bukti uji pada instalasi Switchboard sungguhan.

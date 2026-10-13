@@ -1,0 +1,41 @@
+{
+  "schema": "botconnector.switchboard-plugin-catalog.v1",
+  "catalog": "official",
+  "repository": "https://github.com/farijarifriyanto-debug/switchboard-plugin-examples",
+  "docs": "https://github.com/farijarifriyanto-debug/switchboard#readme",
+  "plugins": [
+    {
+      "name": "hello-tool",
+      "version": "1.0.0",
+      "file": "plugins/hello-tool.mjs",
+      "description": "Minimal plugin: registers a `hello` tool. Use it to verify the plugin pipeline before writing real tools.",
+      "tools": ["hello"],
+      "events": [],
+      "injects": ["tools"],
+      "tags": ["starter", "example"],
+      "testedWith": "switchboard 0.4.1"
+    },
+    {
+      "name": "word-count",
+      "version": "1.0.0",
+      "file": "plugins/word-count.mjs",
+      "description": "Read-only `word_count` tool that counts words/lines/characters in a workspace file by calling the built-in `read_file` via ToolsService.",
+      "tools": ["word_count"],
+      "events": [],
+      "injects": ["tools"],
+      "tags": ["example", "fs", "read-only"],
+      "testedWith": "switchboard 0.4.1"
+    },
+    {
+      "name": "session-ttft",
+      "version": "1.0.0",
+      "file": "plugins/session-ttft.mjs",
+      "description": "Event listener (no tools): logs TTFT/total/tok-per-second for every model call via the `llm/metrics` event.",
+      "tools": [],
+      "events": ["llm/metrics"],
+      "injects": [],
+      "tags": ["example", "observability", "metrics"],
+      "testedWith": "switchboard 0.4.1"
+    }
+  ]
+}
