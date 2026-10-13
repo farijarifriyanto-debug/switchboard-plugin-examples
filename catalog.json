@@ -9,10 +9,17 @@
       "version": "1.0.0",
       "file": "plugins/hello-tool.mjs",
       "description": "Minimal plugin: registers a `hello` tool. Use it to verify the plugin pipeline before writing real tools.",
-      "tools": ["hello"],
+      "tools": [
+        "hello"
+      ],
       "events": [],
-      "injects": ["tools"],
-      "tags": ["starter", "example"],
+      "injects": [
+        "tools"
+      ],
+      "tags": [
+        "starter",
+        "example"
+      ],
       "testedWith": "switchboard 0.4.1"
     },
     {
@@ -20,10 +27,18 @@
       "version": "1.0.0",
       "file": "plugins/word-count.mjs",
       "description": "Read-only `word_count` tool that counts words/lines/characters in a workspace file by calling the built-in `read_file` via ToolsService.",
-      "tools": ["word_count"],
+      "tools": [
+        "word_count"
+      ],
       "events": [],
-      "injects": ["tools"],
-      "tags": ["example", "fs", "read-only"],
+      "injects": [
+        "tools"
+      ],
+      "tags": [
+        "example",
+        "fs",
+        "read-only"
+      ],
       "testedWith": "switchboard 0.4.1"
     },
     {
@@ -32,9 +47,97 @@
       "file": "plugins/session-ttft.mjs",
       "description": "Event listener (no tools): logs TTFT/total/tok-per-second for every model call via the `llm/metrics` event.",
       "tools": [],
-      "events": ["llm/metrics"],
+      "events": [
+        "llm/metrics"
+      ],
       "injects": [],
-      "tags": ["example", "observability", "metrics"],
+      "tags": [
+        "example",
+        "observability",
+        "metrics"
+      ],
+      "testedWith": "switchboard 0.4.1"
+    },
+    {
+      "name": "greeter-config",
+      "version": "1.0.0",
+      "file": "plugins/greeter-config.mjs",
+      "description": "Config-driven tool: `greeter` greets the audience from plugin config — teaches the { src, config } plugin spec.",
+      "tools": [
+        "greeter"
+      ],
+      "events": [],
+      "injects": [
+        "tools"
+      ],
+      "tags": [
+        "example",
+        "config",
+        "starter"
+      ],
+      "testedWith": "switchboard 0.4.1"
+    },
+    {
+      "name": "usage-ledger",
+      "version": "1.0.0",
+      "file": "plugins/usage-ledger.mjs",
+      "description": "Appends one JSONL line per model call (model, ttft, total, tok/s) to .switchboard/usage-ledger.jsonl — self-audit of token usage.",
+      "tools": [],
+      "events": [
+        "llm/metrics"
+      ],
+      "injects": [
+        "workspace"
+      ],
+      "tags": [
+        "example",
+        "observability",
+        "ledger",
+        "jsonl"
+      ],
+      "testedWith": "switchboard 0.4.1"
+    },
+    {
+      "name": "git-snapshot",
+      "version": "1.0.0",
+      "file": "plugins/git-snapshot.mjs",
+      "description": "Read-only `git_snapshot` tool: branch, short status, last 3 commits via child_process — no approval prompt because it never writes.",
+      "tools": [
+        "git_snapshot"
+      ],
+      "events": [],
+      "injects": [
+        "tools",
+        "workspace"
+      ],
+      "tags": [
+        "example",
+        "git",
+        "read-only",
+        "child-process"
+      ],
+      "testedWith": "switchboard 0.4.1"
+    },
+    {
+      "name": "notes",
+      "version": "1.0.0",
+      "file": "plugins/notes.mjs",
+      "description": "Two tools: `notes_add` (risky write, gated by the harness approval) and `notes_list` (read-only) over .switchboard/notes.md.",
+      "tools": [
+        "notes_add",
+        "notes_list"
+      ],
+      "events": [],
+      "injects": [
+        "tools",
+        "workspace"
+      ],
+      "tags": [
+        "example",
+        "write",
+        "approval",
+        "notes"
+      ],
       "testedWith": "switchboard 0.4.1"
     }
   ]

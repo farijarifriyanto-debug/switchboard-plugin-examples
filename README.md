@@ -42,6 +42,10 @@ node scripts/catalog.mjs install word-count   # salin ke ~/.switchboard/plugins/
 | `plugins/hello-tool.mjs` | `hello` | Plugin paling kecil: daftar satu tool tanpa dependencies. Cocok untuk memverifikasi jalur plugin. |
 | `plugins/word-count.mjs` | `word_count` | Tool read-only yang memanggil tool bawaan `read_file` lewat `ctx.tools.call()`. Menghitung kata, baris, dan karakter file di workspace. |
 | `plugins/session-ttft.mjs` | — (listener) | Subscribe event `llm/metrics` dan mencatat TTFT/total/tok-per-detik tiap panggilan model — tanpa mendaftarkan tool baru. |
+| `plugins/greeter-config.mjs` | `greeter` | Plugin berconfig: salaman diambil dari `{ src, config }` di `switchboard.config.jsonc`. |
+| `plugins/usage-ledger.mjs` | — (listener) | Menyimpan satu baris JSONL per panggilan model ke `.switchboard/usage-ledger.jsonl` (audit pemakaian sendiri). |
+| `plugins/git-snapshot.mjs` | `git_snapshot` | Tool read-only via `child_process`: branch, status ringkas, 3 commit terakhir — tanpa approval karena tidak menulis apa pun. |
+| `plugins/notes.mjs` | `notes_add`, `notes_list` | Tool tulis (`risk: 'risky'`, digate approval harness) + tool baca. Contoh menulis file dengan aman. |
 
 ## Pola API plugin
 
@@ -68,6 +72,8 @@ export const plugin = {
 ```
 
 Catatan keamanan yang sama dengan Switchboard: `run_command` dan tool yang menulis file melewati approval; tool read-only sebaiknya tetap hanya membaca workspace. Lihat [README Switchboard](https://github.com/farijarifriyanto-debug/switchboard#readme) untuk model approval dan sandbox.
+
+Catatan API: service harus di-`inject` sebelum dipakai — `ctx.workspace` error dengan "cannot get property without inject" bila tidak ada `"workspace"` di `inject: [...]`. Tool tulis yang berbahaya pasang `risk: 'risky'` supaya digate approval harness (pada `sbx run` tanpa `--yes`, tool itu ditolak otomatis).
 
 ## Uji
 
